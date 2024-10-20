@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import ForgetPassword from "../component/section/forget-password";
 import SignUp from "../component/sign-up";
 import SignIn from "../component/sign-in";
@@ -9,45 +8,50 @@ import Home from "../component/Home";
 import Membership from "../component/section/membership";
 import Profile from "../component/Profile";
 import EmailForm from "../component/shared/email";
-
+import NotFound from "../component/not-found";
+import ProtectedRoute from "./ProtectedRoutes";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignIn />,
+    element: <SignIn />, // Public route
   },
   {
     path: "/home",
-    element: <Home />,
+    element: <ProtectedRoute element={<Home />} />, // Protected route
     children: [
       {
-        path: "invite", // No leading slash for nested paths
+        path: "invite",
         element: <EmailForm />,
       },
     ],
   },
   {
-    path: "/Signup",
-    element: <SignUp />,
+    path: "/signup",
+    element: <SignUp />, // Public route
   },
   {
     path: "/membership",
-    element: <Membership />,
+    element: <ProtectedRoute element={<Membership />} />, // Protected route
   },
   {
-    path: "/Profile",
-    element: <Profile />,
+    path: "/profile",
+    element: <ProtectedRoute element={<Profile />} />, // Protected route
   },
   {
-    path: "forget-password",
-    element: <ForgetPassword />,
+    path: "/forget-password",
+    element: <ForgetPassword />, // Public route
   },
   {
-    path: "check-email",
-    element: <CheckCode />,
+    path: "/check-email",
+    element: <CheckCode />, // Public route
   },
   {
-    path: "mail-component",
-    element: <MailComponent />,
+    path: "/mail-component",
+    element: <ProtectedRoute element={<MailComponent />} />, // Protected route
+  },
+  {
+    path: "*",
+    element: <NotFound />, // Catch-all for 404
   },
 ]);
 

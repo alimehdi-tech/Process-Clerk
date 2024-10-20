@@ -103,7 +103,7 @@ const Membership = () => {
       </section>
 
       <article className="absolute top-0 left-0">
-        <section className="rounded-br-full bg-blue-600 p-5">
+        <section className="rounded-br-full bg-green-500 p-5">
           <div className="flex flex-col gap-6 ">
             <div>
               <span className="text-gray-200 ml-2">Black friday sale</span>
@@ -112,7 +112,7 @@ const Membership = () => {
                 20% off every Product
               </span>
             </div>
-            <button className="text-blue-700 uppercase bg-white hover:bg-gray-50 px-4 py-2 rounded-lg w-fit ease duration-300 flex gap-1 items-center group ">
+            <button className="text-green-600 uppercase bg-white hover:bg-gray-50 px-4 py-2 rounded-lg w-fit ease duration-300 flex gap-1 items-center group ">
               <span>Buy now</span>
               <FaLongArrowAltRight />
             </button>

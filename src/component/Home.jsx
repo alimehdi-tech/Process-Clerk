@@ -13,9 +13,7 @@ import { Outlet } from "react-router-dom";
 function Home() {
   const { register, handleSubmit } = useForm();
   const [NoData, setNoData] = useState(false);
-
   const onSubmit = (data) => {};
-
   const handleFileChange = (e) => {
     const fileList = e.target.files;
     if (fileList) {
@@ -75,6 +73,7 @@ function Home() {
         </section>
         {!NoData && <NoActivity />}
       </article>
+      <Outlet />
     </main>
   );
 }

@@ -1,14 +1,15 @@
 import React from "react";
 import emailjs from "emailjs-com";
-import { TiUserOutline } from "react-icons/ti";
-import { HiOutlineMail } from "react-icons/hi";
 import "react-toastify/dist/ReactToastify.css";
 import {
   showErrorToast,
   showSuccessToast,
 } from "../../authentication/toast/toastService";
+import { useNavigate } from "react-router-dom";
 
 const EmailForm = () => {
+  const navigate = useNavigate();
+
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -26,8 +27,7 @@ Key Features:
 - Analytics and Reporting: Gain insights with built-in analytics tools to track responses and performance.
 - Seamless Integrations: Connect with your favorite apps for a smoother experience.
 
-Join Us Today!
-`;
+Join Us Today!`;
 
     // Send the email
     emailjs
@@ -54,42 +54,42 @@ Join Us Today!
   };
 
   return (
-    <main className="bg-black h-screen bg-opacity-10 flex flex-col justify-center gap-5 items-center">
-      <button class="inner-button">
-        <span class="X"></span>
-        <span class="Y"></span>
-        <div class="close">Close</div>
+    <main className="bg-black absolute w-screen h-screen bg-opacity-30 flex flex-col justify-center gap-5 items-center">
+      <button className="inner-button" onClick={() => navigate("/Home")}>
+        <span className="X"></span>
+        <span className="Y"></span>
+        <div className="close">Close</div>
       </button>
 
-      <form className="email-invite bg" onSubmit={sendEmail}>
-        <p id="heading">Send invitation to your Friend</p>
-        <div className="field">
-          <TiUserOutline className="input-icon" />
+      <form className="email-invite ">
+        <p className="uppercase">Invite your Friend</p>
+        <div className="flex flex-col flex-grow m-10 gap-2 text-xl justify-center items-center">
           <input
-            autoComplete="off"
-            placeholder="Your Friend Name"
-            className="input-field"
-            type="text"
-            name="user_name"
-            required
-          />
-        </div>
-        <div className="field">
-          <HiOutlineMail className="ml-1" />
-          <input
-            placeholder="Your Friend Email"
-            className="input-field"
-            type="email"
+            placeholder="Your friend's e-mail"
+            className="email-input w-full"
             name="to_email"
+            type="email"
+            required
+          />
+
+          <input
+            placeholder="Your Friend Name"
+            className="email-input w-full"
+            name="user_name"
+            type="text"
             required
           />
         </div>
-        <div className="btn-main">
-          <button className="button-main" type="submit">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send
-            it&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </button>
-        </div>
+        <br />
+        <button
+          onClick={() => {
+            sendEmail();
+          }}
+          type="submit"
+          className="submit-btn"
+        >
+          SUBMIT
+        </button>
       </form>
     </main>
   );

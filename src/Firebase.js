@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { getFunctions } from "firebase/functions";
-
 import {
   getAuth,
   setPersistence,
@@ -22,6 +21,7 @@ const firebaseConfig = {
 // Initialize Firebase app
 export const firebaseapp = initializeApp(firebaseConfig);
 
+// Initialize Firebase Authentication and set persistence
 export const auth = getAuth(firebaseapp);
 
 setPersistence(auth, browserLocalPersistence)
@@ -31,4 +31,6 @@ setPersistence(auth, browserLocalPersistence)
   .catch((error) => {
     console.error("Failed to set persistence:", error);
   });
+
+// Initialize Firebase Cloud Functions
 export const functions = getFunctions(firebaseapp);

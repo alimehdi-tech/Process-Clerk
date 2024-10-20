@@ -3,17 +3,19 @@ import { InviteIcon } from "../../assets/icons/invite/User_add";
 import { NotificationIcon } from "../../assets/icons/notification";
 import profile from "../../assets/images/profile.png";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DropdownButton from "../section/dropdown";
 import { auth } from "../../Firebase"; // Firebase auth
 import { getDatabase, ref, get } from "firebase/database"; // Firebase database
 import ProfileLoading from "../section/profile-loading";
+import GlowProfile from "../section/glow-profile";
 
 const Topbar = () => {
   const [boolValue, setBoolValue] = useState(false);
   const [user, setUser] = useState(null); // Holds the authenticated user
   const [fullName, setFullName] = useState(""); // Holds the user's fullName from the database
   const [loading, setLoading] = useState(true); // Loading state
+  const [isHovered, setIsHovered] = useState(false); // State for hover
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,10 +24,13 @@ const Topbar = () => {
 
     return () => clearInterval(interval);
   }, []);
+
   function FilterName(str) {
     let words = str.split(" ");
     return words.length > 1 ? `${words[0]} ${words[1][0]}.` : str;
-}
+  }
+
+  const nav = useNavigate();
 
   useEffect(() => {
     // Listen for changes in the authenticated user state
@@ -71,13 +76,16 @@ const Topbar = () => {
       </div>
 
       <div className="flex items-center space-x-4 text-xl">
-        <button className="text-gray-600 hover:text-gray-900 flex flex-row gap-3">
+        <button
+          onClick={() => nav("/Home/invite")}
+          className="text-gray-600 hover:text-gray-900 flex flex-row gap-3"
+        >
           <InviteIcon /> Invite new user
         </button>
         <DropdownButton />
       </div>
 
-      <section className="flex items-center space-x-4 text-xl px-6">
+      <section className="flex items-center space-x-2 text-xl px-6">
         <Link to="/membership">
           <button className="subscribe rounded-full p-4 shadow-md">
             <IoIosInformationCircleOutline className="subscribe-svg" />
@@ -87,12 +95,15 @@ const Topbar = () => {
         <button className="bell">
           <NotificationIcon />
         </button>
+
         {loading ? (
           <ProfileLoading /> // Show loading indicator if data is being fetched
         ) : user ? (
           <div
-            className="flex flex-row items-center gap-2 p-2 Animated-btn"
+            className="flex flex-row items-center gap-2 p-2 Animated-btn relative z-10 w-full justify-center"
             style={{ border: "none" }}
+            onMouseEnter={() => setIsHovered(true)} // Set hover state to true
+            onMouseLeave={() => setIsHovered(false)} // Set hover state to false
           >
             <h1 className="text-gray-600">{FilterName(fullName)}</h1>
             <img
@@ -100,6 +111,8 @@ const Topbar = () => {
               className="h-12 rounded-full"
               alt="User Profile"
             />
+
+            {isHovered && <GlowProfile />}
           </div>
         ) : null}
       </section>

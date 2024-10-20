@@ -5,6 +5,7 @@ import { ContactIcon } from "../../assets/icons/contacts/User.jsx";
 import { IntegrationIcon } from "../../assets/icons/integration/Structure.jsx";
 import { HomeIcon } from "../../assets/icons/Home/Widget.jsx";
 import { MdSubscriptions } from "react-icons/md";
+import { InviteIcon } from "../../assets/icons/invite/User_add.jsx";
 
 function Sidebar() {
   return (
@@ -50,12 +51,12 @@ function Sidebar() {
             <span className="flex-1 ml-5">Profile</span>
           </li>
         </Link>
-        <Link to="/integration">
+        <Link to="/Home/invite">
           <li className="flex items-center p-2 hover:bg-gray-200 rounded-md shadow-gray-200 shadow-md btn">
             <div className="get-away">
-              <IntegrationIcon className="mr-4" />
+              <InviteIcon className="mr-4" />
             </div>
-            <span className="flex-1 ml-5">Integrations</span>
+            <span className="flex-1 ml-5">Invite</span>
           </li>
         </Link>
         <Link to="/inbox">
