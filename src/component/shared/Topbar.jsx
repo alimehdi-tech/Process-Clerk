@@ -9,6 +9,7 @@ import { auth } from "../../Firebase"; // Firebase auth
 import { getDatabase, ref, get } from "firebase/database"; // Firebase database
 import ProfileLoading from "../section/profile-loading";
 import GlowProfile from "../section/glow-profile";
+import Person from "../../assets/icons/person";
 
 const Topbar = () => {
   const [boolValue, setBoolValue] = useState(false);
@@ -68,7 +69,7 @@ const Topbar = () => {
       setLoading(false); // Set loading to false after fetching data
     }
   };
-
+  console.log(user && user.photoURL);
   return (
     <section className="flex justify-between items-center bg-gray-100 text-xl border-b-4">
       <div className="text-3xl p-6 py-8 font-bold block typewriter text-white bg-blue-700">
@@ -85,7 +86,7 @@ const Topbar = () => {
         <DropdownButton />
       </div>
 
-      <section className="flex items-center space-x-2 text-xl px-6">
+      <section className="flex items-center space-x-4 text-xl px-6">
         <Link to="/membership">
           <button className="subscribe rounded-full p-4 shadow-md">
             <IoIosInformationCircleOutline className="subscribe-svg" />
@@ -106,11 +107,11 @@ const Topbar = () => {
             onMouseLeave={() => setIsHovered(false)} // Set hover state to false
           >
             <h1 className="text-gray-600">{FilterName(fullName)}</h1>
-            <img
-              src={user.photoURL || profile}
-              className="h-12 rounded-full"
-              alt="User Profile"
-            />
+            {user.photoURL ? (
+              <img src={user.photoURL} className="h-12 rounded-full" />
+            ) : (
+              <Person />
+            )}
 
             {isHovered && <GlowProfile />}
           </div>

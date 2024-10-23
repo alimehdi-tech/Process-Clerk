@@ -10,6 +10,7 @@ import Profile from "../component/Profile";
 import EmailForm from "../component/shared/email";
 import NotFound from "../component/not-found";
 import ProtectedRoute from "./ProtectedRoutes";
+import FormBuilder from "../component/FormBuilder/FormBuilder.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/mail-component",
     element: <ProtectedRoute element={<MailComponent />} />, // Protected route
+  },
+  {
+    path: "/Form",
+    element: <FormBuilder />,
   },
   {
     path: "*",

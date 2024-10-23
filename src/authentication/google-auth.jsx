@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getDatabase, ref, set, get, child } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 import { auth } from "../Firebase";
 import { firebaseapp } from "../Firebase";
 import { showErrorToast } from "./toast/toastService";
@@ -19,7 +19,6 @@ export const signInWithGoogle = (navigate) => {
           if (!snapshot.exists()) {
             // User does not exist, save their data
             return set(userRef, {
-              username: user.displayName,
               fullName: user.displayName,
               email: user.email,
               profilePicture: user.photoURL, // Save profile picture URL

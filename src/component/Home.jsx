@@ -9,6 +9,7 @@ import { useState } from "react";
 import NoActivity from "./section/no-activity";
 import InnerBar from "./section/inner-bar";
 import { Outlet } from "react-router-dom";
+import LogOutButton from "../authentication/Logout";
 
 function Home() {
   const { register, handleSubmit } = useForm();
@@ -74,6 +75,7 @@ function Home() {
         {!NoData && <NoActivity />}
       </article>
       <Outlet />
+      <LogOutButton />
     </main>
   );
 }
